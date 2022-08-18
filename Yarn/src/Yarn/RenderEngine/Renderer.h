@@ -3,11 +3,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "RawModel.h"
+#include "../Models/TexturedModel.h"
 
 class Renderer
 {
 public:
 	void prepare();
-	void render(RawModel& model);
+	void render(TexturedModel& texturedModel);
 };

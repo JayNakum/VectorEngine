@@ -1,6 +1,6 @@
 #include "Window.h"
 
-#include "Log.h"
+#include "../Log.h"
 
 void Window::update()
 {
@@ -65,11 +65,6 @@ void Window::setFullScreen(bool fullscreen)
 Window::Window(const char* title, int width, int height)
     : _width(width), _height(height)
 {
-    if (!glfwInit())
-    {
-        ERROR("Failed to initialize GLFW.");
-    }
-
     _glfwWindow = glfwCreateWindow(_width, _height, title, nullptr, nullptr);
     if (_glfwWindow == nullptr)
     {
@@ -78,11 +73,6 @@ Window::Window(const char* title, int width, int height)
     }
 
     glfwMakeContextCurrent(_glfwWindow);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        ERROR("Failed to initialize GLAD.");
-    }
 
     glfwSetWindowUserPointer(_glfwWindow, this);
     glfwSetWindowSizeCallback(_glfwWindow, Window::callbackResize);

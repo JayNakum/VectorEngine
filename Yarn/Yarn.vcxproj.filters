@@ -24,19 +24,34 @@
     <ClCompile Include="vendors\stb_image\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Application.cpp">
+    <ClCompile Include="src\Yarn\RenderEngine\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Yarn\Window.cpp">
+    <ClCompile Include="src\Yarn\RenderEngine\Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Yarn\Loader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Yarn\Renderer.cpp">
+    <ClCompile Include="src\Yarn\RenderEngine\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Yarn\Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yarn\Shaders\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yarn\Shaders\StaticShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yarn\Textures\ModelTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yarn\Models\TexturedModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yarn\Models\RawModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -488,19 +503,34 @@
     <ClInclude Include="vendors\stb_image\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yarn\Window.h">
+    <ClInclude Include="src\Yarn\RenderEngine\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yarn\RawModel.h">
+    <ClInclude Include="src\Yarn\Models\RawModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yarn\Loader.h">
+    <ClInclude Include="src\Yarn\RenderEngine\Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yarn\Renderer.h">
+    <ClInclude Include="src\Yarn\RenderEngine\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Yarn\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yarn\Shaders\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yarn\Shaders\StaticShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yarn\Textures\ModelTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yarn\Models\TexturedModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -838,5 +868,7 @@
     <None Include="vendors\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="res\shaders\fragment.shader" />
+    <None Include="res\shaders\vertex.shader" />
   </ItemGroup>
 </Project>
