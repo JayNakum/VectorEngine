@@ -1,10 +1,6 @@
 # Visual Studio Files
 *.user
 
-# Binaries
-bin/*
-bin-int/*
-
 # Static and Dynamic Libraries
 lib/*
 
