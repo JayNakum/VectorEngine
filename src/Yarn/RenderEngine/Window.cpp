@@ -11,7 +11,7 @@ void Window::update()
         _updateViewport = false;
     }       
 
-    glfwSwapBuffers(_glfwWindow);   
+    glfwSwapBuffers(_glfwWindow);  
 }
 
 bool Window::isCloseRequested()
