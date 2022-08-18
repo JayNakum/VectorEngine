@@ -14,7 +14,9 @@ ShaderProgram::ShaderProgram(const char* vertexShaderPath, const char* fragmentS
     _programID = glCreateProgram();
     glAttachShader(_programID, _vertexShaderID);
     glAttachShader(_programID, _fragmentShaderID);
+    bindAttributes();
     glLinkProgram(_programID);
+    glValidateProgram(_programID);
 
     GLint success;
     GLchar infoLog[1024];
@@ -26,7 +28,7 @@ ShaderProgram::ShaderProgram(const char* vertexShaderPath, const char* fragmentS
         TRACE(infoLog);
     }
 
-    glValidateProgram(_programID);
+    getAllUniformLocations();
 }
 
 ShaderProgram::~ShaderProgram()
@@ -56,9 +58,41 @@ void ShaderProgram::cleanUp()
     glDeleteProgram(_programID);
 }
 
+void ShaderProgram::bindAttributes() {}
+
 void ShaderProgram::bindAttribute(unsigned int attribute, const char* variableName)
 {
     glBindAttribLocation(_programID, attribute, variableName);
+}
+
+void ShaderProgram::getAllUniformLocations() {}
+
+int ShaderProgram::getUniformLocation(const char* uniformName)
+{
+    return glGetUniformLocation(_programID, uniformName);
+}
+
+void ShaderProgram::loadFloat(int location, float value)
+{
+    glUniform1f(location, value);
+}
+
+void ShaderProgram::loadVector(int location, glm::vec3 vector)
+{
+    glUniform3f(location, vector.x, vector.y, vector.z);
+}
+
+void ShaderProgram::loadBoolean(int location, bool value)
+{
+    float toLoad = 0.0f;
+    if (value)
+        toLoad = 1.0f;
+    glUniform1f(location, toLoad);
+}
+
+void ShaderProgram::loadMatrix(int location, glm::mat4 matrix)
+{
+    glUniformMatrix4fv(location, 1, false, &matrix[0][0]);
 }
 
 unsigned int ShaderProgram::loadShader(const char* shaderPath, int type)

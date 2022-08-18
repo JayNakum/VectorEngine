@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 class ShaderProgram 
 {
@@ -13,8 +14,16 @@ public:
 	void cleanUp();
 
 protected:
-	virtual void bindAttributes() = 0;
+	virtual void bindAttributes();
 	void bindAttribute(unsigned int attribute, const char* variableName);
+
+	virtual void getAllUniformLocations();
+	int getUniformLocation(const char* uniformName);
+
+	void loadFloat(int location, float value);
+	void loadVector(int location, glm::vec3 vector);
+	void loadBoolean(int location, bool value);
+	void loadMatrix(int location, glm::mat4 matrix);
 
 private:
 	unsigned int loadShader(const char* shaderPath, int type);
