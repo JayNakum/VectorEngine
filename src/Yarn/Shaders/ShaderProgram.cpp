@@ -14,7 +14,9 @@ ShaderProgram::ShaderProgram(const char* vertexShaderPath, const char* fragmentS
     _programID = glCreateProgram();
     glAttachShader(_programID, _vertexShaderID);
     glAttachShader(_programID, _fragmentShaderID);
+
     bindAttributes();
+    
     glLinkProgram(_programID);
     glValidateProgram(_programID);
 

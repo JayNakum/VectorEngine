@@ -159,6 +159,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Yarn\Entities\Camera.cpp" />
+    <ClCompile Include="src\Yarn\Entities\Entity.cpp" />
+    <ClCompile Include="src\Yarn\Toolbox\Maths.cpp" />
     <ClCompile Include="src\Yarn\Models\RawModel.cpp" />
     <ClCompile Include="src\Yarn\Textures\ModelTexture.cpp" />
     <ClCompile Include="src\Application.cpp" />
@@ -174,6 +177,9 @@
     <ClCompile Include="src\Yarn\RenderEngine\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Yarn\Entities\Camera.h" />
+    <ClInclude Include="src\Yarn\Entities\Entity.h" />
+    <ClInclude Include="src\Yarn\Toolbox\Maths.h" />
     <ClInclude Include="src\Yarn\Textures\ModelTexture.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Yarn\Log.h" />

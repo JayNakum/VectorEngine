@@ -81,6 +81,7 @@ Window::Window(const char* title, int width, int height)
     glfwGetWindowSize(_glfwWindow, &_width, &_height);
     glfwGetWindowPos(_glfwWindow, &_xPos, &_yPos);
 
+    _aspectRatio = (float)_width / (float)_height;
     _updateViewport = true;
 }
 

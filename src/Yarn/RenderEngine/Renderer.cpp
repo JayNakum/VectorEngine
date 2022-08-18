@@ -1,26 +1,43 @@
 #include "Renderer.h"
 
+#include "../Toolbox/Maths.h"
+
 void Renderer::prepare()
 {
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glfwSwapInterval(1);
 }
 
-void Renderer::render(TexturedModel& texturedModel)
+void Renderer::render(Entity& entity, StaticShader& shader)
 {
-	RawModel model = texturedModel.getModel();
+	TexturedModel texturedModel = entity.getModel();
+	RawModel rawModel = texturedModel.getModel();
 
-	glBindVertexArray(model.getVaoID());
+	glBindVertexArray(rawModel.getVaoID());
 	
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	
+	glm::mat4 transformationMatrix = Maths::createTransformation(entity.getPosition(), entity.getRotationX(), entity.getRotationY(), entity.getRotationZ(), entity.getScale());
+
+	shader.loadTransformationMatrix(transformationMatrix);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texturedModel.getTexture().getID());
 
-	glDrawElements(GL_TRIANGLES, model.getVertexCount(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, rawModel.getVertexCount(), GL_UNSIGNED_INT, 0);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glBindVertexArray(0);
+}
+
+Renderer::Renderer(StaticShader& shader, float aspectRatio)
+{
+	_projectionMatrix = glm::perspective(_FOV, aspectRatio, _NEAR_PLANE, _FAR_PLANE);
+	shader.start();
+	shader.loadProjectionMatrix(_projectionMatrix);
+	shader.stop();
 }
