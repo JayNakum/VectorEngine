@@ -1,5 +1,4 @@
 # Visual Studio Files
-.vs/
 *.user
 
 # Binaries
@@ -7,7 +6,7 @@ bin/*
 bin-int/*
 
 # Static and Dynamic Libraries
-Yarn/lib/*
+lib/*
 
 # External libraries
-Yarn/vendors/*
+vendors/*
