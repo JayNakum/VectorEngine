@@ -17,6 +17,7 @@ void Renderer::render(Entity& entity, StaticShader& shader)
 	
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 	
 	glm::mat4 transformationMatrix = Maths::createTransformation(entity.getPosition(), entity.getRotationX(), entity.getRotationY(), entity.getRotationZ(), entity.getScale());
 
@@ -29,6 +30,7 @@ void Renderer::render(Entity& entity, StaticShader& shader)
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 	glBindVertexArray(0);
 }
 
@@ -37,7 +39,7 @@ Renderer::Renderer(StaticShader& shader, float aspectRatio)
 	// glEnable(GL_CULL_FACE);
 	// glCullFace(GL_BACK);
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.3137f, 0.0f, 0.0f, 1.0f);
 
 	_projectionMatrix = glm::perspective(_FOV, aspectRatio, _NEAR_PLANE, _FAR_PLANE);
 	shader.start();

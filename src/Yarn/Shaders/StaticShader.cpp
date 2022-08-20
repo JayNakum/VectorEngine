@@ -13,6 +13,7 @@ void StaticShader::bindAttributes()
 {
 	bindAttribute(0, "position");
 	bindAttribute(1, "textureCoords");
+	bindAttribute(0, "normal");
 }
 
 void StaticShader::getAllUniformLocations()
@@ -20,6 +21,9 @@ void StaticShader::getAllUniformLocations()
 	_location_transformationMatrix = getUniformLocation("transformationMatrix");
 	_location_projectionMatrix = getUniformLocation("projectionMatrix");
 	_location_viewMatrix = getUniformLocation("viewMatrix");
+
+	_location_lightPosition = getUniformLocation("lightPosition");
+	_location_lightColor = getUniformLocation("lightColor");
 }
 
 void StaticShader::loadTransformationMatrix(glm::mat4 matrix)
@@ -36,4 +40,10 @@ void StaticShader::loadViewMatrix(Camera& camera)
 void StaticShader::loadProjectionMatrix(glm::mat4 matrix)
 {
 	loadMatrix(_location_projectionMatrix, matrix);
+}
+
+void StaticShader::loadLight(Light& light)
+{
+	loadVector(_location_lightPosition, light.getPosition());
+	loadVector(_location_lightColor, light.getColor());
 }

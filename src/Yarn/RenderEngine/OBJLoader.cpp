@@ -66,7 +66,7 @@ RawModel OBJLoader::LoadObjModel(const std::string& fileName, Loader& loader)
 	}
 	fclose(file);
 
-	return loader.LoadToVAO(vertices.data(), indices.data(), texturesArray.data(), vertices.size(), indices.size(), texturesArray.size());
+	return loader.LoadToVAO(vertices.data(), indices.data(), texturesArray.data(), normalsArray.data(), vertices.size(), indices.size(), texturesArray.size(), normalsArray.size());
 }
 
 

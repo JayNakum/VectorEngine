@@ -36,7 +36,7 @@ Loader::~Loader()
 }
 
 
-RawModel Loader::LoadToVAO(float* vertices, int* indices, float* texCoords, int vertCount, int indCount, int texCount)
+RawModel Loader::LoadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount)
 {
 	// create a new VAO
 	GLuint vaoID = CreateVAO();
@@ -44,6 +44,7 @@ RawModel Loader::LoadToVAO(float* vertices, int* indices, float* texCoords, int 
 	// Store the data in attribute lists
 	StoreDataInAttributeList(0, 3, vertices, vertCount);
 	StoreDataInAttributeList(1, 2, texCoords, texCount);
+	StoreDataInAttributeList(2, 3, normals, normalsCount);
 	UnbindVAO();
 	return RawModel(vaoID, indCount);
 }

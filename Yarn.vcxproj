@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Yarn\Entities\Light.cpp" />
     <ClCompile Include="src\Yarn\Entities\Camera.cpp" />
     <ClCompile Include="src\Yarn\Entities\Entity.cpp" />
     <ClCompile Include="src\Yarn\RenderEngine\OBJLoader.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="src\Yarn\RenderEngine\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Yarn\Entities\Light.h" />
     <ClInclude Include="src\Yarn\Entities\Camera.h" />
     <ClInclude Include="src\Yarn\Entities\Entity.h" />
     <ClInclude Include="src\Yarn\RenderEngine\OBJLoader.h" />

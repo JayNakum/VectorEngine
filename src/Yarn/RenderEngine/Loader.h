@@ -13,7 +13,7 @@ public:
 	Loader();
 	virtual ~Loader();
 
-	RawModel LoadToVAO(float* vertices, int* indices, float* texCoords, int vertCount, int indCount, int texCount);
+	RawModel LoadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount);
 	GLuint LoadTexture(const std::string& fileName);
 	inline void UnbindVAO() { glBindVertexArray(0); }
 private:
