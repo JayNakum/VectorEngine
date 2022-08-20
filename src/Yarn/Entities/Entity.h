@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+
 #include "../Models/TexturedModel.h"
 
 class Entity

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
+#include <stb_image/stb_image.h>
 
 #include <vector>
 #include <string>
@@ -11,16 +12,18 @@ class Loader
 {
 public:
 	Loader();
-	virtual ~Loader();
 
-	RawModel LoadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount);
-	GLuint LoadTexture(const std::string& fileName);
-	inline void UnbindVAO() { glBindVertexArray(0); }
+	RawModel loadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount);
+	unsigned int loadTexture(const std::string& fileName);
+	void unbindVAO();
+
+	virtual ~Loader();
 private:
-	std::vector<GLuint> m_vaos;
-	std::vector<GLuint> m_vbos;
-	std::vector<GLuint> m_textures;
-	GLuint CreateVAO();
-	void StoreDataInAttributeList(GLuint attribNumber, int size, float* data, int& count);
-	void BindIndicesBuffer(int* indices, int& count);
+	unsigned int createVAO();
+	void storeDataInAttributeList(unsigned int attribNumber, int size, float* data, int count);
+	void bindIndicesBuffer(int* indices, int count);
+
+	std::vector<unsigned int> _VAOs;
+	std::vector<unsigned int> _VBOs;
+	std::vector<unsigned int> _TEXTUREs;
 };

@@ -1,128 +1,122 @@
 #include "Loader.h"
-#include <iostream>
 
-#include <stb_image/stb_image.h>
+#include "../Log.h"
 
-Loader::Loader()
+RawModel Loader::loadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount)
 {
-	// Initialize the storage arrays
-	m_vaos.clear();
-	m_vbos.clear();
-	m_textures.clear();
-}
-
-
-Loader::~Loader()
-{
-	// Loop through all the storage arrays and delete OpenGL variables
-
-	while (m_vbos.size() > 0)
-	{
-		glDeleteBuffers(1, &m_vbos.back());
-		m_vbos.pop_back();
-	}
-
-	while (m_vaos.size() > 0)
-	{
-		glDeleteVertexArrays(1, &m_vaos.back());
-		m_vaos.pop_back();
-	}
-
-	while (m_textures.size() > 0)
-	{
-		glDeleteTextures(1, &m_textures.back());
-		m_textures.pop_back();
-	}
-}
-
-
-RawModel Loader::LoadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount)
-{
-	// create a new VAO
-	GLuint vaoID = CreateVAO();
-	BindIndicesBuffer(indices, indCount);
-	// Store the data in attribute lists
-	StoreDataInAttributeList(0, 3, vertices, vertCount);
-	StoreDataInAttributeList(1, 2, texCoords, texCount);
-	StoreDataInAttributeList(2, 3, normals, normalsCount);
-	UnbindVAO();
+	unsigned int vaoID = createVAO();
+	bindIndicesBuffer(indices, indCount);
+	
+	storeDataInAttributeList(0, 3, vertices, vertCount);
+	storeDataInAttributeList(1, 2, texCoords, texCount);
+	storeDataInAttributeList(2, 3, normals, normalsCount);
+	
+	unbindVAO();
 	return RawModel(vaoID, indCount);
 }
 
 
-GLuint Loader::LoadTexture(const std::string& fileName)
+unsigned int Loader::loadTexture(const std::string& fileName)
 {
-	GLuint texture;
+	unsigned int texture;
 	int width, height, numComponents;
-	// Load image data
+	
 	stbi_uc* imageData = stbi_load(("res\\textures\\" + fileName + ".png").c_str(), &width, &height, &numComponents, 4);
 
 	if (imageData == NULL)
-		std::cerr << "ERROR: texture loading failed for " << fileName << std::endl;
+	{
+		ERROR("FAILED TO LOAD TEXTURE");
+	    ERROR(fileName);
+	}
 
-	// Generate and bind a OpenGL texture
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	// How OpenGL will fill an area that's to big or to small
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// Tell OpenGL to clamp textures to the edge (so you don't get transparent gaps)
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	// Store the OpenGL texture data
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
-	// Store the buffer in the list
-	m_textures.push_back(texture);
+	_TEXTUREs.push_back(texture);
 
-	// Unload image data
 	stbi_image_free(imageData);
 
 	return texture;
 }
 
-
-GLuint Loader::CreateVAO()
+unsigned int Loader::createVAO()
 {
-	GLuint vaoID;
-	// Create a new VAO
+	unsigned int vaoID;
+	
 	glGenVertexArrays(1, &vaoID);
-	// Store the vao in the list
-	m_vaos.push_back(vaoID);
-	// Bind the VAO to use it
+	
+	_VAOs.push_back(vaoID);
+	
 	glBindVertexArray(vaoID);
 	return vaoID;
 }
 
-
-void Loader::StoreDataInAttributeList(GLuint attribNumber, int size, float* data, int& count)
+void Loader::unbindVAO()
 {
-	GLuint vboID;
-	// Create a new buffer
+	glBindVertexArray(0);
+}
+
+void Loader::storeDataInAttributeList(unsigned int attribNumber, int size, float* data, int count)
+{
+	unsigned int vboID;
+	
 	glGenBuffers(1, &vboID);
-	// Store the buffer in the list
-	m_vbos.push_back(vboID);
-	// Bind the buffer to use it
+	
+	_VBOs.push_back(vboID);
+	
 	glBindBuffer(GL_ARRAY_BUFFER, vboID);
-	// Store the data in the buffer
+	
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * count, data, GL_STATIC_DRAW);
-	// Tell OpenGL how and where to store this VBO in the VAO
+	
 	glVertexAttribPointer(attribNumber, size, GL_FLOAT, GL_FALSE, 0, nullptr);
 }
 
 
-void Loader::BindIndicesBuffer(int* indices, int& count)
+void Loader::bindIndicesBuffer(int* indices, int count)
 {
-	GLuint vboID;
-	// Generate a buffer and bind it for use
+	unsigned int vboID;
+	
 	glGenBuffers(1, &vboID);
-	// Store the buffer in the list
-	m_vbos.push_back(vboID);
-	// Bind the buffer to use it
+	
+	_VBOs.push_back(vboID);
+	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboID);
-	// Store the indices in the buffer
+	
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * count, indices, GL_STATIC_DRAW);
+}
+
+Loader::Loader()
+{
+	_VAOs.clear();
+	_VBOs.clear();
+	_TEXTUREs.clear();
+}
+
+Loader::~Loader()
+{
+	while (_VBOs.size() > 0)
+	{
+		glDeleteBuffers(1, &_VBOs.back());
+		_VBOs.pop_back();
+	}
+
+	while (_VAOs.size() > 0)
+	{
+		glDeleteVertexArrays(1, &_VAOs.back());
+		_VAOs.pop_back();
+	}
+
+	while (_TEXTUREs.size() > 0)
+	{
+		glDeleteTextures(1, &_TEXTUREs.back());
+		_TEXTUREs.pop_back();
+	}
 }

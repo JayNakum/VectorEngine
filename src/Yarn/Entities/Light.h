@@ -5,7 +5,7 @@
 class Light
 {
 public:
-	Light(glm::vec3& position, glm::vec3& color);
+	Light(glm::vec3 position, glm::vec3 color);
 	inline glm::vec3 getPosition() { return _position; }
 	inline glm::vec3 getColor() { return _color; }
 private:

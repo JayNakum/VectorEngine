@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RawModel.h"
+
 #include "../Textures/ModelTexture.h"
 
 class TexturedModel

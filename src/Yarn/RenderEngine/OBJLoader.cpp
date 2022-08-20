@@ -1,13 +1,15 @@
 #include "OBJLoader.h"
-#include <stdio.h>
 
-RawModel OBJLoader::LoadObjModel(const std::string& fileName, Loader& loader)
+#include "../Log.h"
+
+RawModel OBJLoader::loadObjModel(const std::string& fileName, Loader& loader)
 {
 	// Open the file as read only
 	FILE* file;
 	if (fopen_s(&file, ("res\\models\\" + fileName + ".obj").c_str(), "r") != 0)
 	{
-		printf("Failed to open: %s\n", fileName);
+		ERROR("FAILED TO LOAD MODEL");
+		ERROR(fileName);
 	}
 
 	// Storage variables
@@ -61,16 +63,16 @@ RawModel OBJLoader::LoadObjModel(const std::string& fileName, Loader& loader)
 				normalsArray.resize(vertices.size());
 			}
 			// Process set of vertex data
-			ProcessVertices(token, indices, textures, texturesArray, normals, normalsArray);
+			processVertices(token, indices, textures, texturesArray, normals, normalsArray);
 		}
 	}
 	fclose(file);
 
-	return loader.LoadToVAO(vertices.data(), indices.data(), texturesArray.data(), normalsArray.data(), vertices.size(), indices.size(), texturesArray.size(), normalsArray.size());
+	return loader.loadToVAO(vertices.data(), indices.data(), texturesArray.data(), normalsArray.data(), vertices.size(), indices.size(), texturesArray.size(), normalsArray.size());
 }
 
 
-void OBJLoader::ProcessVertices(char* vertexData, std::vector<int>& indices, std::vector<glm::vec2>& textures,
+void OBJLoader::processVertices(char* vertexData, std::vector<int>& indices, std::vector<glm::vec2>& textures,
 	std::vector<float>& texturesArray, std::vector<glm::vec3>& normals, std::vector<float>& normalsArray)
 {
 	char* stop;

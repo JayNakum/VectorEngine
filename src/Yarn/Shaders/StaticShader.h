@@ -17,6 +17,8 @@ public:
 	void loadProjectionMatrix(glm::mat4 matrix);
 
 	void loadLight(Light& light);
+	void loadShineVariables(float damper, float reflectivity);
+
 private:
 	int _location_transformationMatrix = 0;
 	int _location_projectionMatrix = 0;
@@ -24,4 +26,6 @@ private:
 
 	int _location_lightPosition = 0;
 	int _location_lightColor = 0;
+	int _location_shineDamper = 0;
+	int _location_reflectivity = 0;
 };
