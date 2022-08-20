@@ -19,4 +19,6 @@ private:
 	float _pitch;
 	float _yaw;
 	float _roll;
+	bool _wireframe = false;
+	float _speed = 0.1f;
 };

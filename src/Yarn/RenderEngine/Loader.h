@@ -2,28 +2,25 @@
 
 #include <glad/glad.h>
 
+#include <vector>
 #include <string>
-#include <list>
 
 #include "../Models/RawModel.h"
 
 class Loader
 {
 public:
-	RawModel loadToVAO(float vertices[], unsigned int vertCount, unsigned int indices[], unsigned int indCount, float textureCoords[], unsigned int texCount);
-
-	unsigned int loadTexture(const std::string& fileName, bool repeat = false);
-
 	Loader();
 	virtual ~Loader();
-	void cleanUp();
-private:
-	unsigned int createVAO();
-	void unbindVAO();
-	void bindIndicesBuffer(unsigned int indices[], unsigned int count);
-	void storeDataInAttributeList(unsigned int attributeNumber, int coordinateSize, float data[], unsigned int count);
 
-	std::list<unsigned int> _VAOs;
-	std::list<unsigned int> _VBOs;
-	std::list<unsigned int> _TEXTUREs;
+	RawModel LoadToVAO(float* vertices, int* indices, float* texCoords, int vertCount, int indCount, int texCount);
+	GLuint LoadTexture(const std::string& fileName);
+	inline void UnbindVAO() { glBindVertexArray(0); }
+private:
+	std::vector<GLuint> m_vaos;
+	std::vector<GLuint> m_vbos;
+	std::vector<GLuint> m_textures;
+	GLuint CreateVAO();
+	void StoreDataInAttributeList(GLuint attribNumber, int size, float* data, int& count);
+	void BindIndicesBuffer(int* indices, int& count);
 };

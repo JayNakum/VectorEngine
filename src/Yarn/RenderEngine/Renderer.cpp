@@ -34,8 +34,8 @@ void Renderer::render(Entity& entity, StaticShader& shader)
 
 Renderer::Renderer(StaticShader& shader, float aspectRatio)
 {
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	// glEnable(GL_CULL_FACE);
+	// glCullFace(GL_BACK);
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
