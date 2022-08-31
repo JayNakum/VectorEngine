@@ -15,7 +15,7 @@ uniform mat4 viewMatrix;
 
 uniform vec3 lightPosition;
 
-void main(void) 
+void main(void)
 {
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
 

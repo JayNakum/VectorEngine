@@ -9,6 +9,7 @@ out vec4 out_color;
 
 uniform sampler2D textureSampler;
 uniform vec3 lightColor;
+uniform float ambientLight;
 uniform float shineDamper;
 uniform float reflectivity;
 
@@ -18,7 +19,7 @@ void main(void)
 	vec3 unitLightVector = normalize(toLightVector);
 
 	float nDot1 = dot(unitNormal, unitLightVector);
-	float brightness = max(nDot1, 0.2);
+	float brightness = max(nDot1, ambientLight);
 	vec3 diffuse = brightness * lightColor;
 
 	

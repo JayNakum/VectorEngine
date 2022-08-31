@@ -24,6 +24,7 @@
     <ProjectGuid>{1f6a1bf0-09c0-48be-8120-cf90fb6e8449}</ProjectGuid>
     <RootNamespace>Yarn</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Vector</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -159,40 +160,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Yarn\Entities\Light.cpp" />
-    <ClCompile Include="src\Yarn\Entities\Camera.cpp" />
-    <ClCompile Include="src\Yarn\Entities\Entity.cpp" />
-    <ClCompile Include="src\Yarn\RenderEngine\OBJLoader.cpp" />
-    <ClCompile Include="src\Yarn\Toolbox\Maths.cpp" />
-    <ClCompile Include="src\Yarn\Models\RawModel.cpp" />
-    <ClCompile Include="src\Yarn\Textures\ModelTexture.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\Yarn\Log.cpp" />
-    <ClCompile Include="src\Yarn\RenderEngine\Renderer.cpp" />
-    <ClCompile Include="src\Yarn\RenderEngine\Loader.cpp" />
-    <ClCompile Include="src\Yarn\Shaders\ShaderProgram.cpp" />
-    <ClCompile Include="src\Yarn\Shaders\StaticShader.cpp" />
-    <ClCompile Include="src\Yarn\Models\TexturedModel.cpp" />
+    <ClCompile Include="src\Vector\Entities\Camera.cpp" />
+    <ClCompile Include="src\Vector\Entities\Entity.cpp" />
+    <ClCompile Include="src\Vector\Entities\Light.cpp" />
+    <ClCompile Include="src\Vector\Log.cpp" />
+    <ClCompile Include="src\Vector\Models\RawModel.cpp" />
+    <ClCompile Include="src\Vector\Models\TexturedModel.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\Loader.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\MasterRenderer.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\OBJLoader.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\Renderer.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\Window.cpp" />
+    <ClCompile Include="src\Vector\Shaders\ShaderProgram.cpp" />
+    <ClCompile Include="src\Vector\Shaders\StaticShader.cpp" />
+    <ClCompile Include="src\Vector\Textures\ModelTexture.cpp" />
+    <ClCompile Include="src\Vector\Toolbox\Maths.cpp" />
     <ClCompile Include="vendors\glad\glad.c" />
     <ClCompile Include="vendors\glm\detail\glm.cpp" />
     <ClCompile Include="vendors\stb_image\stb_image.cpp" />
-    <ClCompile Include="src\Yarn\RenderEngine\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Yarn\Entities\Light.h" />
-    <ClInclude Include="src\Yarn\Entities\Camera.h" />
-    <ClInclude Include="src\Yarn\Entities\Entity.h" />
-    <ClInclude Include="src\Yarn\RenderEngine\OBJLoader.h" />
-    <ClInclude Include="src\Yarn\Toolbox\Maths.h" />
-    <ClInclude Include="src\Yarn\Textures\ModelTexture.h" />
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\Yarn\Log.h" />
-    <ClInclude Include="src\Yarn\RenderEngine\Renderer.h" />
-    <ClInclude Include="src\Yarn\RenderEngine\Loader.h" />
-    <ClInclude Include="src\Yarn\Models\RawModel.h" />
-    <ClInclude Include="src\Yarn\Shaders\ShaderProgram.h" />
-    <ClInclude Include="src\Yarn\Shaders\StaticShader.h" />
-    <ClInclude Include="src\Yarn\Models\TexturedModel.h" />
+    <ClInclude Include="src\Vector\Entities\Camera.h" />
+    <ClInclude Include="src\Vector\Entities\Entity.h" />
+    <ClInclude Include="src\Vector\Entities\Light.h" />
+    <ClInclude Include="src\Vector\Log.h" />
+    <ClInclude Include="src\Vector\Models\RawModel.h" />
+    <ClInclude Include="src\Vector\Models\TexturedModel.h" />
+    <ClInclude Include="src\Vector\RenderEngine\Loader.h" />
+    <ClInclude Include="src\Vector\RenderEngine\MasterRenderer.h" />
+    <ClInclude Include="src\Vector\RenderEngine\OBJLoader.h" />
+    <ClInclude Include="src\Vector\RenderEngine\Renderer.h" />
+    <ClInclude Include="src\Vector\RenderEngine\Window.h" />
+    <ClInclude Include="src\Vector\RenderEngine\WindowManager.h" />
+    <ClInclude Include="src\Vector\Shaders\ShaderProgram.h" />
+    <ClInclude Include="src\Vector\Shaders\StaticShader.h" />
+    <ClInclude Include="src\Vector\Textures\ModelTexture.h" />
+    <ClInclude Include="src\Vector\Toolbox\Maths.h" />
     <ClInclude Include="vendors\glad\glad.h" />
     <ClInclude Include="vendors\GLFW\glfw3.h" />
     <ClInclude Include="vendors\GLFW\glfw3native.h" />
@@ -342,7 +347,6 @@
     <ClInclude Include="vendors\glm\vector_relational.hpp" />
     <ClInclude Include="vendors\KHR\khrplatform.h" />
     <ClInclude Include="vendors\stb_image\stb_image.h" />
-    <ClInclude Include="src\Yarn\RenderEngine\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />

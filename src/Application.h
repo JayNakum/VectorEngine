@@ -3,12 +3,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Yarn/RenderEngine/Window.h"
+#include "Vector/RenderEngine/Window.h"
 
 class Application
 {
 public:
-	Application(const char* title = "Yarn Engine");
+	Application(const char* title = "Vector Engine");
 	~Application();
 
 	void go();

@@ -1,26 +1,25 @@
 #include "Application.h"
 
-#include "Yarn/Log.h"
+#include "Vector/Log.h"
 
-#include "Yarn/RenderEngine/Renderer.h"
-#include "Yarn/RenderEngine/Loader.h"
-#include "Yarn/RenderEngine/OBJLoader.h"
+#include "Vector/RenderEngine/MasterRenderer.h"
+#include "Vector/RenderEngine/Loader.h"
+#include "Vector/RenderEngine/OBJLoader.h"
 
-#include "Yarn/Shaders/StaticShader.h"
+#include "Vector/Shaders/StaticShader.h"
 
-#include "Yarn/Textures/ModelTexture.h"
+#include "Vector/Textures/ModelTexture.h"
 
-#include "Yarn/Models/TexturedModel.h"
+#include "Vector/Models/TexturedModel.h"
 
-#include "Yarn/Entities/Entity.h"
-#include "Yarn/Entities/Camera.h"
-#include "Yarn/Entities/Light.h"
+#include "Vector/Entities/Entity.h"
+#include "Vector/Entities/Camera.h"
+#include "Vector/Entities/Light.h"
 
 void Application::go()
 {
     Loader loader;
     StaticShader shader;
-    Renderer renderer(shader, _window->getAspectRatio());
 
     RawModel model = OBJLoader::loadObjModel("dragon", loader);
     ModelTexture texture(loader.loadTexture("dragon"));
@@ -34,16 +33,14 @@ void Application::go()
 
     Camera camera;
 
+    MasterRenderer mRenderer(_window->getAspectRatio());
+
     while (!_window->isCloseRequested())
     {
         entity.changeRotation(0, 1, 0);
-        camera.move();
-        renderer.prepare();
-        shader.start();
-        shader.loadLight(light);
-        shader.loadViewMatrix(camera);
-        renderer.render(entity, shader);
-        shader.stop();
+        
+        mRenderer.processEntity(entity);
+        mRenderer.render(light, camera);
 
         _window->update();
         glfwPollEvents();
