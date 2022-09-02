@@ -3,8 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <unordered_map>
-#include <vector>
+#include <map>
+#include <list>
 
 #include "../Shaders/StaticShader.h"
 #include "../Models/TexturedModel.h"
@@ -14,15 +14,11 @@
 struct tmCompare
 {
 public:
-	bool operator()(const TexturedModel t1, const TexturedModel& t2)
+	bool operator() (const TexturedModel& t1, const TexturedModel& t2) const
 	{
-		return &t1 == &t2;
+		return ((t1.getRawModel().getVaoID() < t2.getRawModel().getVaoID()) ||
+			(t1.getTexture().getID() < t2.getTexture().getID()));
 	}
-	/*
-	std::size_t operator() (const TexturedModel& t1, const TexturedModel& t2) const {
-		return std::hash<TexturedModel>()(t1) == std::hash<TexturedModel>()(t2);
-	}
-	*/
 };
 
 
@@ -30,7 +26,7 @@ class Renderer
 {
 public:
 	void prepare();
-	void render(std::unordered_map<TexturedModel, std::vector<Entity>, tmCompare>& entities);
+	void render(std::map<TexturedModel, std::list<Entity>, tmCompare>& entities);
 
 	Renderer(StaticShader& shader);
 private:

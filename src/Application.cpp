@@ -37,6 +37,7 @@ void Application::go()
 
     while (!_window->isCloseRequested())
     {
+        camera.move();
         entity.changeRotation(0, 1, 0);
         
         mRenderer.processEntity(entity);

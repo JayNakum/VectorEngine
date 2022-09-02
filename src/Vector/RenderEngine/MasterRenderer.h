@@ -17,5 +17,5 @@ private:
 	StaticShader _shader;
 	Renderer _renderer;
 
-	std::unordered_map<TexturedModel, std::vector<Entity>, tmCompare> _entities;
+	std::map<TexturedModel, std::list<Entity>, tmCompare> _entities;
 };

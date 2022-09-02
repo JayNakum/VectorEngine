@@ -38,7 +38,7 @@ void Renderer::render(Entity& entity, StaticShader& shader)
 }
 */
 
-void Renderer::render(std::unordered_map<TexturedModel, std::vector<Entity>, tmCompare>& entities)
+void Renderer::render(std::map<TexturedModel, std::list<Entity>, tmCompare>& entities)
 {
 	for (auto& key : entities)
 	{

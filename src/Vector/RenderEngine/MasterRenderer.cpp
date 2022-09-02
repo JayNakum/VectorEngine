@@ -32,7 +32,7 @@ void MasterRenderer::render(Light& light, Camera& camera)
 void MasterRenderer::processEntity(Entity& entity)
 {
 	TexturedModel texturedModel = entity.getModel();
-	std::vector<Entity> test;
+	std::list<Entity> test;
 	auto pair = std::make_pair(texturedModel, test);
 	_entities.insert(pair);
 	_entities.find(texturedModel)->second.push_back(entity);
