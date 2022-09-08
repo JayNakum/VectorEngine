@@ -17,7 +17,7 @@ unsigned int ShaderProgram::loadShader(const char* shaderPath, int type)
 
 	// Create temp variables
 	std::string source;
-	char buffer[1024], * token;
+	char buffer[1024];
 	while (fgets(buffer, 1024, file) != NULL)
 	{
 		source.append(buffer);

@@ -22,13 +22,12 @@ public:
 };
 
 
-class Renderer
+class EntityRenderer
 {
 public:
-	void prepare();
 	void render(std::map<TexturedModel, std::list<Entity>, tmCompare>& entities);
 
-	Renderer(StaticShader& shader);
+	EntityRenderer(StaticShader& shader, glm::mat4 projectionMatrix);
 private:
 	void bindTexturedModel(TexturedModel texturedModel);
 	void unbindTexturedModel();

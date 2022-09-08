@@ -2,21 +2,22 @@
 
 #include "../Log.h"
 
-RawModel Loader::loadToVAO(float* vertices, int* indices, float* texCoords, float* normals, int vertCount, int indCount, int texCount, int normalsCount)
+RawModel Loader::loadToVAO(std::list<glm::vec3> vertices, std::list<glm::vec2> textures, std::list<glm::vec3> normals, std::vector<int> indices)
 {
 	unsigned int vaoID = createVAO();
-	bindIndicesBuffer(indices, indCount);
+	int indCount = indices.size();
+	bindIndicesBuffer(indices.data(), indCount);
 	
-	storeDataInAttributeList(0, 3, vertices, vertCount);
-	storeDataInAttributeList(1, 2, texCoords, texCount);
-	storeDataInAttributeList(2, 3, normals, normalsCount);
+	storeDataInAttributeList(0, 3, &vertices.begin(), vertices.size() * sizeof(glm::vec3));
+	storeDataInAttributeList(1, 2, &textures.begin(), textures.size() * sizeof(glm::vec2));
+	storeDataInAttributeList(2, 3, &normals.begin(), normals.size() * sizeof(glm::vec3));
 	
 	unbindVAO();
 	return RawModel(vaoID, indCount);
 }
 
 
-unsigned int Loader::loadTexture(const std::string& fileName)
+unsigned int Loader::loadTexture(const std::string& fileName, bool repeat = false)
 {
 	unsigned int texture;
 	int width, height, numComponents;
@@ -35,8 +36,11 @@ unsigned int Loader::loadTexture(const std::string& fileName)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	if (!repeat) 
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	}
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
@@ -64,7 +68,7 @@ void Loader::unbindVAO()
 	glBindVertexArray(0);
 }
 
-void Loader::storeDataInAttributeList(unsigned int attribNumber, int size, float* data, int count)
+void Loader::storeDataInAttributeList(unsigned int attribNumber, int size, void* data, int count)
 {
 	unsigned int vboID;
 	

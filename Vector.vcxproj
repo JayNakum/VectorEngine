@@ -170,12 +170,15 @@
     <ClCompile Include="src\Vector\RenderEngine\Loader.cpp" />
     <ClCompile Include="src\Vector\RenderEngine\MasterRenderer.cpp" />
     <ClCompile Include="src\Vector\RenderEngine\OBJLoader.cpp" />
-    <ClCompile Include="src\Vector\RenderEngine\Renderer.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\EntityRenderer.cpp" />
     <ClCompile Include="src\Vector\RenderEngine\Window.cpp" />
     <ClCompile Include="src\Vector\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="src\Vector\Shaders\StaticShader.cpp" />
     <ClCompile Include="src\Vector\Textures\ModelTexture.cpp" />
     <ClCompile Include="src\Vector\Toolbox\Maths.cpp" />
+    <ClCompile Include="src\Vector\Terrains\Terrain.cpp" />
+    <ClCompile Include="src\Vector\Shaders\TerrainShader.cpp" />
+    <ClCompile Include="src\Vector\RenderEngine\TerrainRenderer.cpp" />
     <ClCompile Include="vendors\glad\glad.c" />
     <ClCompile Include="vendors\glm\detail\glm.cpp" />
     <ClCompile Include="vendors\stb_image\stb_image.cpp" />
@@ -191,13 +194,16 @@
     <ClInclude Include="src\Vector\RenderEngine\Loader.h" />
     <ClInclude Include="src\Vector\RenderEngine\MasterRenderer.h" />
     <ClInclude Include="src\Vector\RenderEngine\OBJLoader.h" />
-    <ClInclude Include="src\Vector\RenderEngine\Renderer.h" />
+    <ClInclude Include="src\Vector\RenderEngine\EntityRenderer.h" />
     <ClInclude Include="src\Vector\RenderEngine\Window.h" />
     <ClInclude Include="src\Vector\RenderEngine\WindowManager.h" />
     <ClInclude Include="src\Vector\Shaders\ShaderProgram.h" />
     <ClInclude Include="src\Vector\Shaders\StaticShader.h" />
     <ClInclude Include="src\Vector\Textures\ModelTexture.h" />
     <ClInclude Include="src\Vector\Toolbox\Maths.h" />
+    <ClInclude Include="src\Vector\Terrains\Terrain.h" />
+    <ClInclude Include="src\Vector\Shaders\TerrainShader.h" />
+    <ClInclude Include="src\Vector\RenderEngine\TerrainRenderer.h" />
     <ClInclude Include="vendors\glad\glad.h" />
     <ClInclude Include="vendors\GLFW\glfw3.h" />
     <ClInclude Include="vendors\GLFW\glfw3native.h" />
@@ -350,6 +356,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />
+    <None Include="res\shaders\terrain.fragment.shader" />
+    <None Include="res\shaders\terrain.vertex.shader" />
     <None Include="res\shaders\vertex.shader" />
     <None Include="vendors\glm\detail\func_common.inl" />
     <None Include="vendors\glm\detail\func_common_simd.inl" />

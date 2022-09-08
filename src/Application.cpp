@@ -21,8 +21,8 @@ void Application::go()
     Loader loader;
     StaticShader shader;
 
-    RawModel model = OBJLoader::loadObjModel("dragon", loader);
-    ModelTexture texture(loader.loadTexture("dragon"));
+    RawModel model = OBJLoader::loadObjModel("box", loader);
+    ModelTexture texture(loader.loadTexture("box", false));
 
     texture.setShineDamper(10.0f);
     texture.setReflectivity(1.0f);
@@ -31,15 +31,22 @@ void Application::go()
     Entity entity(texturedModel, glm::vec3(0.0f, 0.0f, -25.0f), 0.0f, 0.0f, 0.0f, 1.0f);
     Light light(glm::vec3(0, 0, -20), glm::vec3(1, 1, 1));
 
+    ModelTexture terrain(loader.loadTexture("lamp", true));
+    Terrain terrain1(0, 0, loader, terrain);
+    Terrain terrain2(1, 0, loader, terrain);
+
     Camera camera;
 
     MasterRenderer mRenderer(_window->getAspectRatio());
 
     while (!_window->isCloseRequested())
     {
-        camera.move();
         entity.changeRotation(0, 1, 0);
+        camera.move();
         
+        mRenderer.processTerrain(terrain1);
+        mRenderer.processTerrain(terrain2);
+
         mRenderer.processEntity(entity);
         mRenderer.render(light, camera);
 
