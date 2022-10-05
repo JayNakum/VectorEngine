@@ -27,4 +27,4 @@ Directly open the solution in Visual Studio.
 # How to contribute?
 - Checkout the existing code base and try to find existing bugs or new features that can be added.
 - Go to the [issues](https://github.com/JayNakum/vector-engine/issues) tab, and check for existing issues or add new issues.
-- Refer to [CONTRIBUTING.md]()
+- Refer to [CONTRIBUTING.md](CONTRIBUTING.md)
