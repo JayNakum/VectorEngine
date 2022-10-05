@@ -1,6 +1,6 @@
 # Contributing
 
-[Business Email Validator](https://github.com/LoginRadius/business-email-validator) is [MIT](LICENSE) licensed and accepts contributions via GitHub pull requests. This document outlines some of the conventions on development workflow, commit message formatting, contact points, and other resources to make it easier to get your contribution accepted.
+[Vector Engine](https://github.com/JayNakum/vector-engine) is [MIT](LICENSE) licensed and accepts contributions via GitHub pull requests. This document outlines some of the conventions on development workflow, commit message formatting, contact points, and other resources to make it easier to get your contribution accepted.
 
 ## Contribution Flow
 
